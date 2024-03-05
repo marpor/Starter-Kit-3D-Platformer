@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3b5x3h00kvuv"]
+
+[ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="1_2i60t"]
+[ext_resource type="Script" path="res://objects/sign.gd" id="1_devni"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_57dmc"]
+size = Vector3(0.785149, 0.633789, 0.0393066)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tf5vf"]
+albedo_color = Color(0.411765, 0.207843, 0.117647, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xxenv"]
+material = SubResource("StandardMaterial3D_tf5vf")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_h3qbc"]
+size = Vector3(0.8, 0.4, 0.02)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rgqyt"]
+radius = 0.269276
+
+[node name="Sign" type="StaticBody3D"]
+script = ExtResource("1_devni")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00232697, 0.314896, 0.0195007)
+shape = SubResource("BoxShape3D_57dmc")
+
+[node name="Stick" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("CylinderMesh_xxenv")
+
+[node name="Plate" type="MeshInstance3D" parent="Stick"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13403, 0.0251026)
+mesh = SubResource("BoxMesh_h3qbc")
+
+[node name="Text" type="Label3D" parent="Stick/Plate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0136719)
+modulate = Color(0, 0, 0, 1)
+text = "HELLO"
+font = ExtResource("1_2i60t")
+outline_size = 0
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00277328, 0.370003, 0.425793)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_rgqyt")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

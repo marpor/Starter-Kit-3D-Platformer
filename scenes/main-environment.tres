@@ -1,4 +1,4 @@
-[gd_resource type="Environment" load_steps=3 format=3 uid="uid://bqnqgflivjvue"]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://cd7i5msed71mb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lg8b7"]
 sky_horizon_color = Color(0.67451, 0.682353, 0.698039, 1)
@@ -10,11 +10,10 @@ ground_curve = 0.171484
 sky_material = SubResource("ProceduralSkyMaterial_lg8b7")
 
 [resource]
-background_mode = 1
 background_color = Color(0.752941, 0.776471, 0.827451, 1)
 sky = SubResource("Sky_7bk1c")
 ambient_light_source = 2
-ambient_light_color = Color(0.662745, 0.694118, 0.772549, 1)
+ambient_light_color = Color(0.752941, 0.776471, 0.827451, 1)
 ambient_light_energy = 1.15
 tonemap_mode = 2
 ssao_enabled = true

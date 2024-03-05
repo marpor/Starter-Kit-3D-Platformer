@@ -14,10 +14,10 @@ func _process(delta):
 	if falling:
 		gravity += 0.25
 
-
 func _on_body_entered(_body):
 	if !falling:
-		Audio.play("res://sounds/fall.ogg") # Play sound
+		$SoundFall.play() # Play sound
 		scale = Vector3(1.25, 1, 1.25) # Animate scale
-		
+	
+	await get_tree().create_timer(.125).timeout
 	falling = true

@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr3pp6hiaswfn"]
+
+[ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="1_0aowq"]
+[ext_resource type="Script" path="res://menus/scene_switch_button.gd" id="2_sadwp"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.0
+offset_top = 51.0
+offset_right = 124.0
+offset_bottom = 121.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("1_0aowq")
+theme_override_font_sizes/font_size = 60
+text = "My Game"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.0
+offset_top = 188.0
+offset_right = 132.0
+offset_bottom = 295.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_0aowq")
+theme_override_font_sizes/font_size = 40
+text = "Start"
+script = ExtResource("2_sadwp")
+scene = "res://scenes/main.tscn"
+
+[node name="StartButton2" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -299.0
+offset_top = 360.0
+offset_right = -35.0
+offset_bottom = 440.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_0aowq")
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+script = ExtResource("2_sadwp")
+scene = "res://scenes/scene2.tscn"
+
+[node name="StartButton3" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 53.0
+offset_top = 360.0
+offset_right = 317.0
+offset_bottom = 440.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_0aowq")
+theme_override_font_sizes/font_size = 30
+text = "Shop"
+script = ExtResource("2_sadwp")
+scene = "res://menus/skin_shop.tscn"
+
+[connection signal="pressed" from="StartButton" to="StartButton" method="_on_pressed"]
+[connection signal="pressed" from="StartButton2" to="StartButton2" method="_on_pressed"]
+[connection signal="pressed" from="StartButton3" to="StartButton3" method="_on_pressed"]

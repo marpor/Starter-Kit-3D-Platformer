@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dl2ed4gkybggf"]
+[gd_scene load_steps=12 format=3 uid="uid://dl2ed4gkybggf"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ffboj"]
 [ext_resource type="PackedScene" uid="uid://c0e27836xgmhi" path="res://objects/character.tscn" id="2_nero3"]
 [ext_resource type="Texture2D" uid="uid://8ggihh27mlrr" path="res://sprites/blob_shadow.png" id="3_0c7wt"]
 [ext_resource type="ArrayMesh" uid="uid://deu06eho4c74" path="res://meshes/dust.res" id="4_mvhqy"]
 [ext_resource type="AudioStream" uid="uid://cydjn1ct3hps2" path="res://sounds/walking.ogg" id="5_ics1s"]
+[ext_resource type="AudioStream" uid="uid://bygrj12u37fyu" path="res://sounds/coin.ogg" id="6_i8lp6"]
+[ext_resource type="AudioStream" uid="uid://cko3em7xury11" path="res://sounds/fall.ogg" id="7_2loyx"]
+[ext_resource type="AudioStream" uid="uid://dw2m5fxhfjykq" path="res://sounds/jump.ogg" id="8_0ffnm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gdq8c"]
 radius = 0.3
@@ -25,28 +28,15 @@ point_count = 3
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 3
 script = ExtResource("1_ffboj")
+jump_strength = 75
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
 shape = SubResource("CapsuleShape3D_gdq8c")
 
 [node name="Character" parent="." instance=ExtResource("2_nero3")]
-
-[node name="leg-left" parent="Character/character2/root" index="0"]
-transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 0.125, 0.17625, -0.02375)
-
-[node name="leg-right" parent="Character/character2/root" index="1"]
-transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -0.125, 0.17625, -0.02375)
-
-[node name="torso" parent="Character/character2/root" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, -1.80478e-15, 0.17625, -0.02375)
-
-[node name="arm-left" parent="Character/character2/root/torso" index="0"]
-transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.3, 0.2, 0)
-
-[node name="arm-right" parent="Character/character2/root/torso" index="1"]
-transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.3, 0.1445, 0)
 
 [node name="Shadow" type="Decal" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
@@ -74,4 +64,19 @@ volume_db = -5.0
 pitch_scale = 1.25
 autoplay = true
 
-[editable path="Character"]
+[node name="SoundCoin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_i8lp6")
+volume_db = -5.0
+pitch_scale = 1.25
+max_polyphony = 3
+
+[node name="SoundLand" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_2loyx")
+volume_db = -5.0
+pitch_scale = 1.25
+
+[node name="SoundJump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_0ffnm")
+volume_db = -5.0
+pitch_scale = 1.25
+max_polyphony = 6

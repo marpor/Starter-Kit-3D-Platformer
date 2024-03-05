@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxdakcdtcyypr"]
+
+[ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="1_l42kg"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_afeu0"]
+height = 0.25
+radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_surtm"]
+albedo_color = Color(0.215686, 0.458824, 0.164706, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ltr2r"]
+material = SubResource("StandardMaterial3D_surtm")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7v074"]
+albedo_color = Color(0.670588, 0.447059, 0.196078, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_mi01t"]
+material = SubResource("StandardMaterial3D_7v074")
+inner_radius = 1.75
+outer_radius = 2.125
+rings = 32
+ring_segments = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k5qhv"]
+albedo_color = Color(0.470588, 0.235294, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ihh33"]
+material = SubResource("StandardMaterial3D_k5qhv")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_suad8"]
+size = Vector3(0.8, 0.4, 0.02)
+
+[node name="SignPlatform" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_afeu0")
+
+[node name="Platform" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_ltr2r")
+
+[node name="Platform2" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_mi01t")
+
+[node name="Pole" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("CylinderMesh_ihh33")
+skeleton = NodePath("../Platform")
+
+[node name="Sign" type="MeshInstance3D" parent="Pole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.596425, 0)
+mesh = SubResource("BoxMesh_suad8")
+skeleton = NodePath("../../Platform")
+
+[node name="Text" type="Label3D" parent="Pole/Sign"]
+unique_name_in_owner = true
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0.0103631)
+modulate = Color(0, 0, 0, 1)
+text = "SHOP"
+font = ExtResource("1_l42kg")
+font_size = 200
+outline_size = 0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.910799, 0.41285, 0, -0.41285, 0.910799, 0, 1.72408, 3.95104)
+fov = 49.6

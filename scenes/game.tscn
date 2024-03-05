@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://djgn6lxcuncl3"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_2o0ba"]
+[ext_resource type="Texture2D" uid="uid://cd7oyc56ehkx1" path="res://sprites/coin.png" id="2_7hkpa"]
+[ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="3_gvh46"]
+[ext_resource type="AudioStream" uid="uid://mem4jqf0842r" path="res://sounds/music-1.mp3" id="4_2ddb8"]
+[ext_resource type="Shader" path="res://scripts/glitch.gdshader" id="5_kcyxy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ui6qd"]
+font = ExtResource("3_gvh46")
+font_size = 48
+shadow_color = Color(0, 0, 0, 0.376471)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oxvsg"]
+shader = ExtResource("5_kcyxy")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.001
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
+[node name="Game" type="Node"]
+script = ExtResource("1_2o0ba")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 56.0
+offset_top = 68.0
+offset_right = 96.0
+offset_bottom = 108.0
+
+[node name="Music" type="AudioStreamPlayer" parent="HUD/Control"]
+unique_name_in_owner = true
+stream = ExtResource("4_2ddb8")
+
+[node name="Icon" type="TextureRect" parent="HUD/Control"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_7hkpa")
+
+[node name="x" type="Label" parent="HUD/Control"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = -4.0
+offset_right = 88.0
+offset_bottom = 55.0
+text = "×"
+label_settings = SubResource("LabelSettings_ui6qd")
+
+[node name="Coins" type="Label" parent="HUD/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 88.0
+offset_top = -4.0
+offset_right = 312.0
+offset_bottom = 55.0
+text = "0"
+label_settings = SubResource("LabelSettings_ui6qd")
+
+[node name="Glitch" type="ColorRect" parent="HUD"]
+visible = false
+material = SubResource("ShaderMaterial_oxvsg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2ddb8")

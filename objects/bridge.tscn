@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://28ie5c6l2uus"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1a6h5"]
+albedo_color = Color(0.454902, 0.560784, 0.529412, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nr2cx"]
+material = SubResource("StandardMaterial3D_1a6h5")
+size = Vector3(5, 0.5, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1rn26"]
+data = PackedVector3Array(-2.5, 0.25, 1, 2.5, 0.25, 1, -2.5, -0.25, 1, 2.5, 0.25, 1, 2.5, -0.25, 1, -2.5, -0.25, 1, 2.5, 0.25, -1, -2.5, 0.25, -1, 2.5, -0.25, -1, -2.5, 0.25, -1, -2.5, -0.25, -1, 2.5, -0.25, -1, 2.5, 0.25, 1, 2.5, 0.25, -1, 2.5, -0.25, 1, 2.5, 0.25, -1, 2.5, -0.25, -1, 2.5, -0.25, 1, -2.5, 0.25, -1, -2.5, 0.25, 1, -2.5, -0.25, -1, -2.5, 0.25, 1, -2.5, -0.25, 1, -2.5, -0.25, -1, 2.5, 0.25, 1, -2.5, 0.25, 1, 2.5, 0.25, -1, -2.5, 0.25, 1, -2.5, 0.25, -1, 2.5, 0.25, -1, -2.5, -0.25, 1, 2.5, -0.25, 1, -2.5, -0.25, -1, 2.5, -0.25, 1, 2.5, -0.25, -1, -2.5, -0.25, -1)
+
+[node name="bridge" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_nr2cx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1rn26")
